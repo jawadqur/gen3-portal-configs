@@ -103,7 +103,7 @@ jobs:
           LATEST: ${{ matrix.environments }}-latest
         with:
           build-args: |
-            PORTAL_HOSTNAME: ${{ matrix.environments }}
+            PORTAL_HOSTNAME=${{ matrix.environments }}
           context: .
           push: true
           tags: quay.io/cdis/data-portal-prebuilt:${{ env.TAG }}, quay.io/cdis/data-portal-prebuilt:${{ env.LATEST }}
