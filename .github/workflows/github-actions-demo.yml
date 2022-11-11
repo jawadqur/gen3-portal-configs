@@ -34,13 +34,11 @@ jobs:
             const folders = JSON.parse("${{ steps.changed-files.outputs.all_changed_files }}");
             const newArr = [];
             for (let folder of folders) {
-                if (folder.startsWith('packages')) {
-                    const folderNameParts = folder.split('/');
-                    const folderName = `${folderNameParts[0]}/${folderNameParts[1]}`
-                    if (!newArr.includes(folderName)) {
-                        newArr.push(folderName)
-                    }
-                }
+              const folderNameParts = folder.split('/');
+              const folderName = `${folderNameParts[0]}`
+              if (!newArr.includes(folderName)) {
+                  newArr.push(folderName)
+              }
             }
             core.setOutput('dir_names', JSON.stringify(JSON.stringify(newArr)))
       - id: set-matrix
