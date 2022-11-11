@@ -85,6 +85,7 @@ jobs:
           script: |
             const rawtag = "${{ matrix.environments }}"
             const tag = rawtag.replace('.', '_')
+            console.log(tag)
             core.setOutput('tag', tag)
 
       
