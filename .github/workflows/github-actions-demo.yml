@@ -96,7 +96,7 @@ jobs:
             PORTAL_HOSTNAME: ${{ matrix.environments }}
           context: .
           push: true
-          tags: quay.io/data-portal-prebuilt:${{ steps.set_version.outputs.tag }}
+          tags: quay.io/cdis/data-portal-prebuilt:${{ steps.set_version.outputs.tag }}
 
 
 
