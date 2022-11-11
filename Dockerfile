@@ -4,7 +4,6 @@ FROM quay.io/cdis/data-portal:${CODE_VERSION} as builder
 ARG PORTAL_HOSTNAME=healdata.org
 
 
-# ENV PORTAL_HOSTNAME healdata.org
 ENV APP gitops
 ENV BASENAME /
 
@@ -14,9 +13,9 @@ RUN echo "PORTAL: ${PORTAL_HOSTNAME}"
 COPY webpack.config.js webpack.config.js 
 COPY ${PORTAL_HOSTNAME}/portal/gitops.json data/config/
 COPY ${PORTAL_HOSTNAME}/portal/gitops-logo.png custom/logo/gitops-logo.png
-COPY ${PORTAL_HOSTNAME}/portal/gitops-favicon.ico custom/favicon/gitops-favicon.ico
+# COPY ${PORTAL_HOSTNAME}/portal/*.ico custom/favicon/gitops-favicon.ico
 COPY ${PORTAL_HOSTNAME}/portal/gitops.css custom/css/gitops.css
-COPY ${PORTAL_HOSTNAME}/portal/gitops-sponsors custom/sponsors/gitops-sponsors
+# COPY ${PORTAL_HOSTNAME}/portal/gitops-sponsors custom/sponsors/gitops-sponsors
 
 ENV NODE_ENV=production
 RUN bash runWebpack.sh
