@@ -100,12 +100,13 @@ jobs:
         uses: docker/build-push-action@v3
         env: 
           TAG: ${{ matrix.environments }}-${{ steps.date.outputs.date }}
+          LATEST: ${{ matrix.environments }}-latest
         with:
           build-args: |
             PORTAL_HOSTNAME: ${{ matrix.environments }}
           context: .
           push: true
-          tags: quay.io/cdis/data-portal-prebuilt:${TAG}
+          tags: quay.io/cdis/data-portal-prebuilt:${{ env.TAG }}, quay.io/cdis/data-portal-prebuilt:${{ env.LATEST }}
 
 
 
