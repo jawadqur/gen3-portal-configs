@@ -65,10 +65,11 @@ jobs:
           repository: uc-cdis/data-portal
           path: './data-portal'
 
-      - name: Use Node.js 16.x
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          cache-dependency-path: data-portal/package-lock.json
+          node-version: 14
           cache: 'npm'
 
       - name: Install node modules
