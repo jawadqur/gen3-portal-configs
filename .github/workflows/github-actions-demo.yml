@@ -18,6 +18,8 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
+        with:
+          dir_names: "true"
 
       - name: List all changed files
         run: |
