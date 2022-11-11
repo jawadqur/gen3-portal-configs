@@ -3,7 +3,7 @@
   "graphql": {
     "boardCounts": [
       {
-        "graphql": "_test_subject_count",
+        "graphql": "_subject_count",
         "name": "Subject",
         "plural": "Subjects"
       },
