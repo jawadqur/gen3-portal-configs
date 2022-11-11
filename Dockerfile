@@ -1,8 +1,7 @@
 ARG CODE_VERSION=feat_jq_prebuilder	
 FROM quay.io/cdis/data-portal:${CODE_VERSION} as builder
 
-ARG PORTAL_HOSTNAME=healdata.org
-
+ARG PORTAL_HOSTNAME
 
 ENV APP gitops
 ENV BASENAME /
