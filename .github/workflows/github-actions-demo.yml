@@ -45,7 +45,7 @@ jobs:
         run: echo "matrix={\"environments\":${{ steps.get-dir-names.outputs.dir_names }}}" >> "$GITHUB_OUTPUT"
 
   matrix-builder-job:
-    name: Job for ${{ matrix.environments }}
+    name: Build gen3 data-portal for ${{ matrix.environments }}
     timeout-minutes: 20
     runs-on: ubuntu-latest
     needs: [get-changes-for-envs]
@@ -78,18 +78,24 @@ jobs:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_ROBOT_TOKEN }}
-      -
-        name: Build and push
+      - name: Set Versions
+        uses: actions/github-script@v6
+        id: set_version
+        with:
+          script: |
+            const rawtag = "${{ matrix.environments }}"
+            const tag = rawtag.replace('.', '_')
+            core.setOutput('tag', tag)
+
+      
+      - name: Build and push
         uses: docker/build-push-action@v3
-        env: 
-          RAWTAG=${{ matrix.environments }}
-          TAG=${$RAWTAG//./_}
         with:
           build-args: |
             PORTAL_HOSTNAME: ${{ matrix.environments }}
           context: .
           push: true
-          tags: quay.io/data-portal-prebuilt:${TAG}
+          tags: quay.io/data-portal-prebuilt:${{ steps.set_version.outputs.tag }}
 
 
 
