@@ -10,11 +10,10 @@ RUN echo "PORTAL: ${PORTAL_HOSTNAME}"
 # COPY dockerStart.sh ./runWebpack.sh ./package.json ./
 # COPY data data
 COPY webpack.config.js webpack.config.js 
-COPY ${PORTAL_HOSTNAME}/portal/gitops.json data/config/
-COPY ${PORTAL_HOSTNAME}/portal/gitops-logo.png custom/logo/gitops-logo.png
-# COPY ${PORTAL_HOSTNAME}/portal/*.ico custom/favicon/gitops-favicon.ico
-COPY ${PORTAL_HOSTNAME}/portal/gitops.css custom/css/gitops.css
-# COPY ${PORTAL_HOSTNAME}/portal/gitops-sponsors custom/sponsors/gitops-sponsors
+
+COPY ${PORTAL_HOSTNAME}/portal/ /overrides
+COPY overrides.sh .
+RUN bash overrides.sh
 
 ENV NODE_ENV=production
 RUN bash runWebpack.sh
